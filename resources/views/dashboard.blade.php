@@ -11,7 +11,9 @@
                 <div class="p-6 text-gray-900 dark:text-gray-100">
                     {{ __("You're logged in!") }}
                 </div>
+                <livewire:search helpme="initial search"/>
             </div>
         </div>
     </div>
+
 </x-app-layout>
