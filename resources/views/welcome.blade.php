@@ -21,6 +21,7 @@
                 <livewire:welcome.navigation />
             @endif
                 <livewire:search helpme="initial search"/>
+                <livewire:trending-posts>
         </div>
     </body>
 </html>

@@ -25,18 +25,15 @@ class tags extends Model
 
     // Define the attributes that are mass assignable
     protected $fillable = [
-        'id',
+        
         'tag_name',
-        'post_id'
+        
     ];
-
+    
     /**
      * Get the post that owns the tag.
      */
-    public function post()
-    {
-        return $this->belongsTo('App\Models\UserPost', 'post_id');
-    }
+  
     
     // Override the setKeysForSaveQuery method to handle composite keys
     protected function setKeysForSaveQuery($query)

@@ -18,6 +18,7 @@ new class extends Component
 
 <nav x-data="{ open: false }" class="bg-white dark:bg-gray-800 border-b border-gray-100 dark:border-gray-700">
     <!-- Primary Navigation Menu -->
+    
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between h-16">
             <div class="flex">
@@ -34,6 +35,11 @@ new class extends Component
                         {{ __('Dashboard') }}
                     </x-nav-link>
                 </div>
+                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+    <x-nav-link href="create-post" :active="request()->routeIs('create-post')" wire:navigate>
+        {{ __('Create a Post') }}
+    </x-nav-link>
+</div>
             </div>
 
             <!-- Settings Dropdown -->

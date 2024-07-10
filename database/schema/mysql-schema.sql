@@ -70,16 +70,27 @@ CREATE TABLE `personal_access_tokens` (
   KEY `personal_access_tokens_tokenable_type_tokenable_id_index` (`tokenable_type`,`tokenable_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
+DROP TABLE IF EXISTS `post_tags`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `post_tags` (
+  `tag_id` bigint unsigned NOT NULL,
+  `post_id` bigint unsigned NOT NULL,
+  PRIMARY KEY (`tag_id`,`post_id`),
+  KEY `post_tags_post_id_foreign` (`post_id`),
+  CONSTRAINT `post_tags_post_id_foreign` FOREIGN KEY (`post_id`) REFERENCES `user_posts` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `post_tags_tag_id_foreign` FOREIGN KEY (`tag_id`) REFERENCES `tags` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
 DROP TABLE IF EXISTS `tags`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `tags` (
-  `id` bigint unsigned NOT NULL,
-  `tag_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `post_id` bigint unsigned NOT NULL,
-  PRIMARY KEY (`id`,`post_id`),
-  KEY `tags_post_id_foreign` (`post_id`),
-  CONSTRAINT `tags_post_id_foreign` FOREIGN KEY (`post_id`) REFERENCES `user_posts` (`id`) ON DELETE CASCADE
+  `tag_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 DROP TABLE IF EXISTS `user_posts`;
@@ -129,3 +140,7 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES (5,'2024_06_13_0953
 INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES (6,'2024_06_20_130003_followers',2);
 INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES (7,'2024_06_24_065937_tags',3);
 INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES (8,'2024_06_24_075349_tags',4);
+INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES (9,'2024_07_09_111552_add_timestamps_to_tags_table',5);
+INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES (10,'2024_07_09_112639_remove_post_id_from_tags_table',5);
+INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES (11,'2024_07_09_112721_create_post_tags_table',5);
+INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES (12,'2024_07_09_113359_modify_tags_table_add_auto_increment_to_id',5);

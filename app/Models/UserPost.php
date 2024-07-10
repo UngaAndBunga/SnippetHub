@@ -16,11 +16,11 @@ class UserPost extends Model
     protected $fillable = [
         'post_name',
         'post_content',
-        'post_tags',
         'post_owner',
         'timestamp'
+      
     ];
-
+    public $timestamps = false; // Disable timestamps
     // If you are storing tags as JSON, cast the post_tags attribute to array
     // protected $casts = [
     //     'post_tags' => 'array',
@@ -28,8 +28,5 @@ class UserPost extends Model
     // ];
 
     // Define the relationship with the User model
-    public function user()
-    {
-        return $this->belongsTo(User::class, 'post_owner');
-    }
+  
 }
