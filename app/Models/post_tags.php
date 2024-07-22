@@ -16,4 +16,14 @@ class post_tags extends Model
       
     ];
     public $timestamps = false;
+    public function post()
+    {
+        return $this->belongsTo(UserPost::class, 'post_id');
+    }
+
+    // Relationship with Tag model
+    public function tag()
+    {
+        return $this->belongsTo(tags::class, 'id');
+    }
 }

@@ -35,6 +35,12 @@ class tags extends Model
      */
   
     
+    
+    
+    
+     public function postsTags() {
+        return $this->hasMany('App\Models\post_tags');
+    }
     // Override the setKeysForSaveQuery method to handle composite keys
     protected function setKeysForSaveQuery($query)
     {

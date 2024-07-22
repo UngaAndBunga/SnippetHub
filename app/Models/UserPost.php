@@ -28,5 +28,12 @@ class UserPost extends Model
     // ];
 
     // Define the relationship with the User model
-  
+    public function postsTags() {
+        return $this->hasMany(post_tags::class, 'post_id');
+        
+    }
+    public function user() {
+        return $this->belongsTo(User::class, 'post_owner');
+    }
+
 }
