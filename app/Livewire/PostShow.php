@@ -24,6 +24,6 @@ class PostShow extends Component
 
     public function render()
     {
-        return view('livewire.post-show')->layout(\App\View\Components\AppLayout::class);
+        return view('livewire.post-show')->layout('layouts.post');
     }
 }
