@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Livewire\CreatePost;
+use App\Livewire\PostShow;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,9 +22,11 @@ Route::view('dashboard', 'dashboard')
     ->name('dashboard');
 
 Route::get('/create-post',CreatePost::class)->middleware(['auth', 'verified'])->name('create-post');
-
+Route::get('/posts/{id}',PostShow::class)->name('posts.show');
 Route::view('profile', 'profile')
     ->middleware(['auth'])
     ->name('profile');
 
 require __DIR__.'/auth.php';
+
+
