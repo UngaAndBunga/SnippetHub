@@ -16,11 +16,13 @@
     </head>
     <body class="antialiased">
 
-        <div class="relative sm:flex sm:justify-center sm:items-center min-h-screen bg-dots-darker bg-center bg-gray-100 dark:bg-dots-lighter dark:bg-gray-900 selection:bg-red-500 selection:text-white">
-            @if (Route::has('login'))
-                <livewire:welcome.navigation />
-            @endif
-            <div class="flex justify-center pt-6">
+    <div class="relative min-h-screen bg-gray-100 dark:bg-gray-900 selection:bg-red-500 selection:text-white">
+        @if (Route::has('login'))
+            <livewire:welcome.navigation />
+        @endif
+
+        <!-- Centered search component -->
+        <div class="flex justify-center pt-6">
             <div class="w-full max-w-4xl px-4">
                 <livewire:search helpme="initial search"/>
             </div>
@@ -29,7 +31,6 @@
         <main class="p-6">
             {{ $slot }}
         </main>
-
-        </div>
+    </div>
     </body>
 </html>
