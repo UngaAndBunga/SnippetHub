@@ -4,6 +4,9 @@
             <h1 class="text-2xl font-semibold">{{ $user->name }}</h1>
             <p class="mt-2 text-lg">{{ $user->email }}</p>
             <!-- Add more user details as needed -->
+            @if(Auth::check() && Auth::id() !== $user->id)
+                <livewire:follow-button :userId="$user->id" />
+            @endif
         </div>
     </div>
 

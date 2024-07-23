@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Livewire\CreatePost;
 use App\Livewire\PostShow;
 use App\Livewire\UserShow;
+use App\Livewire\FollowButton;
 
 
 /*
