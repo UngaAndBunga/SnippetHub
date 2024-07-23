@@ -2,6 +2,33 @@
 @tailwind components;
 @tailwind utilities;
 
+
+.search-container input {
+    border: none; /* Remove the border */
+    box-shadow: none; /* Remove any shadow */
+    outline: none; /* Remove the outline */
+}
+
+
+.search-container {
+    position: relative;
+    display: inline-block;
+    vertical-align: middle; /* Ensures alignment with the profile dropdown */
+}
+
+.search-results {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    z-index: 10;
+    background-color: white;
+    border: 1px solid #ccc;
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+
     .tag-box {
         display: inline-block;
         background-color: #d4edda;

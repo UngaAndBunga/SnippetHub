@@ -23,7 +23,12 @@ class PostShow extends Component
     }
 
     public function render()
-    {
-        return view('livewire.post-show')->layout('layouts.post');
-    }
+{
+    // Determine the appropriate layout based on user authentication status
+    $layout = auth()->check() ? 'layouts.app' : 'layouts.post';
+
+    // Return the view with the selected layout
+    return view('livewire.post-show')->layout($layout);
+}
+
 }

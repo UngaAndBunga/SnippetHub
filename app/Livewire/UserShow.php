@@ -18,12 +18,20 @@ class UserShow extends Component
         $this->user = User::find($id);
         $this->posts = UserPost::where('post_owner', $id)->get();
     }
-        public function render()
+       
+    public function render()
         {
+            {
+                // Determine the appropriate layout based on user authentication status
+                $layout = auth()->check() ? 'layouts.app' : 'layouts.post';
+            
+                // Return the view with the selected layout
+                
             return view('livewire.user-show', [
                 'user' => $this->user,
                 'posts' => $this->posts
-            ])->layout('layouts.post');
-        }
+            ])->layout('layouts.post')->layout($layout);
+            }
+        }  
 }
     
