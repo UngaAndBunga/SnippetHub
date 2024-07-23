@@ -28,10 +28,16 @@
                 </header>
             @endif
 
-            <!-- Page Content -->
-            <main>
-                {{ $slot }}
-            </main>
+            <div class="flex">
+                <aside class="w-1/4 p-4">
+                    <livewire:followed-users />
+                </aside>
+                
+                <main class="w-3/4 p-4">
+                    <livewire:search helpme="initial search"/>
+                    {{ $slot }}
+                </main>
+            </div>
         </div>
         @livewireScripts()
     </body>
