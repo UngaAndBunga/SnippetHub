@@ -1,6 +1,6 @@
-<div class="center mx-auto max-w-4xl px-4">
+<div class="center mx-auto max-w-4xl px-4 py-6">
     <div class="relative">
-        <input wire:model.live="helpme" type="text" class="w-fit px-4 py-2 text-gray-700 bg-white border border-gray-300 rounded-lg focus:outline-none focus:ring" placeholder="Search...">
+        <input wire:model.live="helpme" type="text" class="w-full px-4 py-2 text-gray-700 bg-white border border-gray-300 rounded-lg focus:outline-none focus:ring" placeholder="Search...">
     </div>
 
     @if(!empty($searchResults))
@@ -25,18 +25,21 @@
     @endif
 
     @if(!empty($userResults))
-        <ul class="mt-4 border border-gray-300 bg-white rounded-lg shadow-lg">
+        <ul class="mt-4 w-full max-w-4xl mx-auto border border-gray-300 bg-white rounded-lg shadow-lg">
             @foreach($userResults as $result)
                 <li class="p-4 border-b border-gray-300">
-                    <!-- Add content for user results here -->
+                    <a href="{{ route('users.show', ['id' => $result['id']]) }}" class="block hover:bg-gray-100">
+                        <h3 class="text-lg font-semibold">{{ $result['name'] }}</h3>
+                        <p class="text-gray-600">{{ $result['email'] }}</p>
+                    </a>
                 </li>
             @endforeach
         </ul>
-    @else
-        @if($helpme)
-            <div class="mt-4 text-gray-600">
-                No results found for "{{ $helpme }}"
-            </div>
-        @endif
+    @endif
+
+    @if(empty($searchResults) && empty($userResults) && $helpme)
+        <div class="mt-4 w-full max-w-4xl mx-auto text-gray-600">
+            No results found for "{{ $helpme }}"
+        </div>
     @endif
 </div>

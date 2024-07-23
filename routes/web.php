@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Livewire\CreatePost;
 use App\Livewire\PostShow;
+use App\Livewire\UserShow;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -14,6 +16,8 @@ use App\Livewire\PostShow;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+Route::get('/users/{id}', UserShow::class)->name('users.show');
+
 
 Route::view('/', 'welcome');
 
