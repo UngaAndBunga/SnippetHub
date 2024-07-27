@@ -19,18 +19,18 @@
         @if (Route::has('login'))
         <div>
             <livewire:welcome.navigation />
-        </div> 
+        </div>
             @endif
 
         <!-- Centered search component -->
         <div class="flex justify-center pt-6">
             <div class=" max-w-4xl px-4">
-                <livewire:search helpme="initial search"/>
+                <livewire:search helpme=""/>
             </div>
-           
+
         </div>
         <div>
-                <livewire:trending-posts>
+                <livewire:trending-posts/>
             </div>
     </div>
     </body>

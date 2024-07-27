@@ -24,7 +24,7 @@
         <!-- Centered search component -->
         <div class="flex justify-center pt-6">
             <div class="w-full max-w-4xl px-4">
-                <livewire:search helpme="initial search"/>
+                <livewire:search helpme=""/>
             </div>
         </div>
 

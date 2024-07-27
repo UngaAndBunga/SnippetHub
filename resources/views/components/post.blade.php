@@ -2,8 +2,7 @@
 
 <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg mb-4">
     <div class="p-6 text-gray-900 dark:text-gray-100">
-        
-    <h3 class="text-lg font-semibold">{{ $post['post_name'] }}</h3>
+        <h3 class="text-lg font-semibold">{{ $post['post_name'] }}</h3>
         <div x-data="{ showText: false }" class="relative">
             <div x-ref="content" :class="{'max-h-[15em] overflow-hidden': !showText}" class="prose dark:prose-dark">
                 <pre x-ref="pre">{{ $post->post_content }}</pre>
@@ -17,6 +16,10 @@
                     {{ $tag }}
                 </span>
             @endforeach
+        </div>
+
+        <div class="mt-2">
+            @livewire('vote', ['post' => $post])
         </div>
     </div>
 </div>
