@@ -1,6 +1,6 @@
 @props(['post', 'tags'])
 
-<div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg mb-4">
+<div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
     <div class="p-6 text-gray-900 dark:text-gray-100">
         <h3 class="text-lg font-semibold">{{ $post['post_name'] }}</h3>
         <div x-data="{ showText: false }" class="relative">
