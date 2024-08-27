@@ -1,21 +1,16 @@
 import './bootstrap';
 import 'alpinejs'
 import hljs from 'highlight.js';
-import 'highlight.js/styles/intellij-light.min.css'; // You can choose another theme if you prefer
+import 'highlight.js/styles/github-dark-dimmed.min.css';
 
 document.addEventListener('DOMContentLoaded', (event) => {
     document.querySelectorAll('pre').forEach((block) => {
         hljs.highlightElement(block);
     });
-    // Hide the loading screen after the page loads
     const loadingScreen = document.getElementById('loading-screen');
     if (loadingScreen) {
-        loadingScreen.style.display = 'none';
+        setTimeout(function() {
+            loadingScreen.style.display = 'none';
+        }, 1000); // 1000 milliseconds = 1 second
     }
 });
-setTimeout(function() {
-    const loadingScreen = document.getElementById('loading-screen');
-    if (loadingScreen) {
-        loadingScreen.style.display = 'none';
-    }
-}, 2000); // 2 seconds fallback

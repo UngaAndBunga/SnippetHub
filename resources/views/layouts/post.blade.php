@@ -15,7 +15,15 @@
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
     <body class="antialiased">
-
+    <div
+        wire:loading.delay
+        class="fixed inset-0 flex items-center justify-center bg-white bg-opacity-75 z-50">
+        <div class="flex items-center space-x-2">
+            <div class="w-4 h-4 bg-blue-500 rounded-full animate-bounce"></div>
+            <div class="w-4 h-4 bg-green-500 rounded-full animate-bounce"></div>
+            <div class="w-4 h-4 bg-red-500 rounded-full animate-bounce"></div>
+        </div>
+    </div>
     <div class="relative min-h-screen bg-gray-100 dark:bg-gray-900 selection:bg-red-500 selection:text-white">
         @if (Route::has('login'))
             <livewire:welcome.navigation />
@@ -24,7 +32,7 @@
         <!-- Centered search component -->
         <div class="flex justify-center pt-6">
             <div class="w-full max-w-4xl px-4">
-                <livewire:search helpme=""/>
+                <livewire:search search=""/>
             </div>
         </div>
 

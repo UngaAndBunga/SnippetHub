@@ -21,10 +21,11 @@
 
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
-        @livewireStyles()
     </head>
     <body class="font-sans antialiased">
-    <div id="loading-screen" class="fixed inset-0 flex items-center justify-center bg-white z-50">
+    <div
+        wire:loading.delay
+        class="fixed inset-0 flex items-center justify-center bg-white bg-opacity-75 z-50">
         <div class="flex items-center space-x-2">
             <div class="w-4 h-4 bg-blue-500 rounded-full animate-bounce"></div>
             <div class="w-4 h-4 bg-green-500 rounded-full animate-bounce"></div>
@@ -47,13 +48,10 @@
                 <aside class="w-1/4 p-4">
                     <livewire:followed-users />
                 </aside>
-
                 <main class="w-3/4 p-4">
-
                     {{ $slot }}
                 </main>
             </div>
         </div>
-
     </body>
 </html>

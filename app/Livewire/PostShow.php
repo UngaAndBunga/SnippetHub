@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Livewire;
+
 use Livewire\Attributes\Layout;
 
 use App\Models\UserPost;
@@ -23,12 +24,9 @@ class PostShow extends Component
     }
 
     public function render()
-{
-    // Determine the appropriate layout based on user authentication status
-    $layout = auth()->check() ? 'layouts.app' : 'layouts.post';
-
-    // Return the view with the selected layout
-    return view('livewire.post-show')->layout($layout);
-}
-
+    {
+        $layout = auth()->check() ? 'layouts.guest' : 'layouts.post';
+        // Return the view with the selected layout
+        return view('components.post')->layout($layout)->with([$this->tags, $this->post]);
+    }
 }

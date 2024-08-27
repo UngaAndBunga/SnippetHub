@@ -9,7 +9,7 @@ use Livewire\Component;
 
 class Search extends Component
 {
-    public $helpme;
+    public $search;
 
     public function render()
     {
@@ -17,9 +17,9 @@ class Search extends Component
         $postTags = [];
         $userResults = collect();  // Use collect() to initialize an empty collection
 
-        if (!empty($this->helpme)) {
+        if (!empty($this->search)) {
             // Fetch search results as Eloquent collections
-            $searchResults = UserPost::where('post_name', 'like', '%' . $this->helpme . '%')->get();
+            $searchResults = UserPost::where('post_name', 'like', '%' . $this->search . '%')->get();
 
             foreach ($searchResults as $post) {
                 $postId = $post->id;
@@ -29,7 +29,7 @@ class Search extends Component
             }
 
             // Fetch user results as Eloquent collections
-            $userResults = User::where('name', 'like', '%' . $this->helpme . '%')->get();
+            $userResults = User::where('name', 'like', '%' . $this->search . '%')->get();
         }
 
         return view('livewire.search', [

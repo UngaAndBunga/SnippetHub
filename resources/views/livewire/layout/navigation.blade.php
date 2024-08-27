@@ -44,7 +44,7 @@ new class extends Component
             <!-- Search and Settings -->
             <div class="hidden sm:flex sm:items-center sm:ms-auto space-x-6">
                 <!-- Search Component -->
-                <livewire:search id="search-bar-top" helpme="" class="search-container no-underline"/>
+                <livewire:search id="search-bar-top" search="" class="search-container no-underline"/>
 
                 <!-- Settings Dropdown -->
                 <x-dropdown align="right" width="48">

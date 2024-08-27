@@ -15,25 +15,24 @@
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
     <body class="font-sans text-gray-900 antialiased">
+    <div
+        wire:loading.delay
+        class="fixed inset-0 flex items-center justify-center bg-white bg-opacity-75 z-50">
+        <div class="flex items-center space-x-2">
+            <div class="w-4 h-4 bg-blue-500 rounded-full animate-bounce"></div>
+            <div class="w-4 h-4 bg-green-500 rounded-full animate-bounce"></div>
+            <div class="w-4 h-4 bg-red-500 rounded-full animate-bounce"></div>
+        </div>
+    </div>
         <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-gray-100 dark:bg-gray-900">
             <div>
                 <a href="/" wire:navigate>
                     <x-application-logo class="w-20 h-20 fill-current text-gray-500" />
                 </a>
             </div>
-
-
             <div class="w-full sm:max-w-md mt-6 px-6 py-4 bg-white dark:bg-gray-800 shadow-md overflow-hidden sm:rounded-lg">
                 {{ $slot }}
             </div>
         </div>
-        <div id="loading-screen" class="fixed inset-0 flex items-center justify-center bg-white z-50">
-            <div class="flex items-center space-x-2">
-                <div class="w-4 h-4 bg-blue-500 rounded-full animate-bounce"></div>
-                <div class="w-4 h-4 bg-green-500 rounded-full animate-bounce"></div>
-                <div class="w-4 h-4 bg-red-500 rounded-full animate-bounce"></div>
-            </div>
-        </div>
-
     </body>
 </html>
