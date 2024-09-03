@@ -21,17 +21,16 @@ class Vote extends Component
     {
         // Check if user is authenticated
         if (!Auth::check()) {
-            return; // Or handle not authenticated case
+            return;
         }
 
-        // Get the user ID
         $userId = Auth::id();
 
         // Check if the user has already voted for this post
         $vote = VoteModel::where('user_id', $userId)->where('post_id', $this->post->id)->first();
 
         if ($vote) {
-            // If the vote type is the same, remove the vote (toggle)
+            // If the vote type is the same, remove the vote
             if ($vote->vote_type === $type) {
                 $vote->delete();
             } else {
@@ -40,7 +39,6 @@ class Vote extends Component
                 $vote->save();
             }
         } else {
-            // Create a new vote
             VoteModel::create([
                 'user_id' => $userId,
                 'post_id' => $this->post->id,

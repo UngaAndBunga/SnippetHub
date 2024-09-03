@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
     document.querySelectorAll('pre').forEach((block) => {
         hljs.highlightElement(block);
     });
-    const loadingScreen = document.getElementById('loading-screen');
+    var loadingScreen = document.getElementById('loading-screen');
     if (loadingScreen) {
         setTimeout(function() {
             loadingScreen.style.display = 'none';

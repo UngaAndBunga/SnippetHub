@@ -16,7 +16,6 @@
     </head>
     <body class="font-sans text-gray-900 antialiased">
     <div
-        wire:loading.delay
         class="fixed inset-0 flex items-center justify-center bg-white bg-opacity-75 z-50">
         <div class="flex items-center space-x-2">
             <div class="w-4 h-4 bg-blue-500 rounded-full animate-bounce"></div>

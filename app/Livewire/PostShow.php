@@ -2,14 +2,10 @@
 
 namespace App\Livewire;
 
-use Livewire\Attributes\Layout;
-
 use App\Models\UserPost;
-use App\Models\post_tags;
 use App\Models\tags;
-use Livewire\Component;
-use Illuminate\Support\Facades\Auth;
 
+use Livewire\Component;
 
 class PostShow extends Component
 {
