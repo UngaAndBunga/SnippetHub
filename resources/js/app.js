@@ -5,6 +5,7 @@ import 'highlight.js/styles/github-dark-dimmed.min.css';
 
 document.addEventListener('DOMContentLoaded', (event) => {
     document.querySelectorAll('pre').forEach((block) => {
+
         hljs.highlightElement(block);
     });
     var loadingScreen = document.getElementById('loading-screen');

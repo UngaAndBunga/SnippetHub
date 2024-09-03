@@ -1,7 +1,7 @@
-<div class="m-6 mb-0 pb-6">
-    <div class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight mb-4 center text-center">
+<div class="lg:m-6 lg:mb-0 pb-10 sm:m-0">
+    <h1 class="font-semibold text-3xl text-gray-200 leading-tight mb-4 center text-center">
         {{ __('Trending Posts') }}
-    </div>
+    </h1>
     @foreach ($postsWithTags as $item)
         <x-post :post="$item['post']" :tags="$item['tags']" />
     @endforeach

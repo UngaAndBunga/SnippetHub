@@ -16,7 +16,7 @@
 </head>
 <body class="antialiased">
 <x-loading-screen/>
-<div class="relative min-h-screen bg-gray-100 dark:bg-gray-900 selection:bg-red-500 selection:text-white m-0">
+<div class="relative min-h-screen bg-gray-900 selection:bg-red-500 selection:text-white m-0">
     @if (Route::has('login'))
         <div>
             <livewire:welcome.navigation/>
