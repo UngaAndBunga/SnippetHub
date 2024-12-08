@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class post_tags extends Model
+class PostTags extends Model
 {
     use HasFactory;
     protected $table = 'post_tags';
@@ -13,7 +13,7 @@ class post_tags extends Model
     protected $fillable = [
         'post_id',
         'tag_id'
-      
+
     ];
     public $timestamps = false;
     public function post()
@@ -21,7 +21,6 @@ class post_tags extends Model
         return $this->belongsTo(UserPost::class, 'post_id');
     }
 
-    // Relationship with Tag model
     public function tag()
     {
         return $this->belongsTo(tags::class, 'id');
