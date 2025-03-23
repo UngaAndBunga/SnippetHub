@@ -19,6 +19,8 @@ class MainModel extends Model
     use UsesMemoryCache;
     use UsesRedisCache;
 
+    public static int $ttl = 30;
+
     public static function checkCache($key)
     {
         $memoryCache = self::getFromMemoryCache($key);
@@ -124,6 +126,6 @@ class MainModel extends Model
     protected static function storeInCache($key, $data): void
     {
         self::storeInMemoryCache($key, $data, is_object($data));
-        self::storeInRedisCache($key, $data);
+        self::storeInRedisCache($key, $data, self::$ttl);
     }
 }
