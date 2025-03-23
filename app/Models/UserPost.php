@@ -45,7 +45,7 @@ class UserPost extends MainModel
         'timestamp',
     ];
 
-    public int $ttl = 60;
+    public static int $ttl = 60;
 
     public $timestamps = false;
 
