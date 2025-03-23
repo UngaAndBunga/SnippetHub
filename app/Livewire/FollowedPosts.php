@@ -2,17 +2,25 @@
 
 namespace App\Livewire;
 
-use Livewire\Component;
-use Illuminate\Support\Facades\Auth;
-use App\Models\UserPost;
 use App\Models\tags;
+use App\Models\UserPost;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
+use Illuminate\Foundation\Application;
+use Illuminate\Support\Facades\Auth;
+use Livewire\Component;
 
 class FollowedPosts extends Component
 {
     public $followedPosts;
+
     public $followedUsers;
+
     public $tags;
 
+    /**
+     * @throws \JsonException
+     */
     public function mount()
     {
         $this->followedUsers = Auth::user()->followees;
@@ -20,12 +28,12 @@ class FollowedPosts extends Component
         $this->tags = collect();
 
         foreach ($this->followedUsers as $followedUser) {
-            $posts = UserPost::where('post_owner', $followedUser->id)->get();
+            $posts = (new UserPost)->where('post_owner', $followedUser->id)->get();
             $this->followedPosts = $this->followedPosts->merge($posts);
 
             foreach ($posts as $post) {
                 $tagIds = $post->postsTags()->pluck('tag_id')->toArray();
-                $tags = tags::whereIn('id', $tagIds)->pluck('tag_name')->toArray();
+                $tags = Tags::whereIn('id', $tagIds)->pluck('tag_name')->toArray();
                 $this->tags = $this->tags->merge($tags);
             }
         }
@@ -34,7 +42,7 @@ class FollowedPosts extends Component
         $this->tags = $this->tags->unique();
     }
 
-    public function render()
+    public function render(): View|Application|Factory
     {
         return view('livewire.followed-posts', [
             'followedPosts' => $this->followedPosts,

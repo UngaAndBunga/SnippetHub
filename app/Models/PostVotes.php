@@ -6,11 +6,21 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class VoteModel extends Model
+/**
+ * @property-read UserPost|null $post
+ * @property-read \App\Models\User|null $user
+ *
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|PostVotes newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|PostVotes newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|PostVotes query()
+ *
+ * @mixin \Eloquent
+ */
+class PostVotes extends MainModel
 {
     use HasFactory;
 
-    protected $table = 'votes';
+    protected $table = 'post_votes';
 
     protected $fillable = [
         'user_id',

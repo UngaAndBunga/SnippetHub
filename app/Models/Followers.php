@@ -2,12 +2,21 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Builder;
 
-class Followers extends Model
+/**
+ * @method static Builder<static>|Followers newModelQuery()
+ * @method static Builder<static>|Followers newQuery()
+ * @method static Builder<static>|Followers query()
+ *
+ * @mixin \Eloquent
+ */
+class Followers extends MainModel
 {
     protected $table = 'followers';
-    public $timestamps = false;
-    protected $fillable = ['follower_id', 'followee_id'];
+
+    protected $fillable = [
+        'follower_id',
+        'followee_id',
+    ];
 }

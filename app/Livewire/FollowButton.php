@@ -2,31 +2,37 @@
 
 namespace App\Livewire;
 
-use Livewire\Component;
-use Illuminate\Support\Facades\Auth;
-use App\Models\User;
 use App\Models\Followers;
+use Illuminate\Support\Facades\Auth;
+use Livewire\Component;
 
 class FollowButton extends Component
 {
-    public $userId;
-    public $isFollowing;
+    public int $userId;
 
-    public function mount($userId)
+    public bool $isFollowing;
+
+    /**
+     * @throws \JsonException
+     */
+    public function mount($userId): void
     {
         $this->userId = $userId;
-        $this->isFollowing = Followers::where('follower_id', Auth::id())->where('followee_id', $this->userId)->exists();
+        $this->isFollowing = (new Followers)->where('follower_id', Auth::id())->where('followee_id', $this->userId)->exists();
     }
 
-    public function follow()
+    /**
+     * @throws \JsonException
+     */
+    public function follow(): void
     {
         if ($this->isFollowing) {
-            Followers::where('follower_id', Auth::id())->where('followee_id', $this->userId)->delete();
+            (new Followers)->where('follower_id', Auth::id())->where('followee_id', $this->userId)->delete();
             $this->isFollowing = false;
         } else {
             Followers::create([
                 'follower_id' => Auth::id(),
-                'followee_id' => $this->userId
+                'followee_id' => $this->userId,
             ]);
             $this->isFollowing = true;
         }

@@ -2,32 +2,42 @@
 
 namespace App\Livewire;
 
-use Livewire\Component;
-use App\Models\VoteModel;
+use App\Models\PostVotes;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
+use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Auth;
+use Livewire\Component;
 
 class Vote extends Component
 {
     public $post;
+
     public int $votes_percent = 0;
 
+    /**
+     * @throws \JsonException
+     */
     public function mount($post)
     {
         $this->post = $post;
         $this->updateVotesPercent();
     }
 
-    public function vote($type)
+    /**
+     * @throws \JsonException
+     */
+    public function vote($type): void
     {
         // Check if user is authenticated
-        if (!Auth::check()) {
+        if (! Auth::check()) {
             return;
         }
 
         $userId = Auth::id();
 
         // Check if the user has already voted for this post
-        $vote = VoteModel::where('user_id', $userId)->where('post_id', $this->post->id)->first();
+        $vote = (new PostVotes)->where('user_id', $userId)->where('post_id', $this->post->id)->first();
 
         if ($vote) {
             // If the vote type is the same, remove the vote
@@ -39,7 +49,7 @@ class Vote extends Component
                 $vote->save();
             }
         } else {
-            VoteModel::create([
+            PostVotes::create([
                 'user_id' => $userId,
                 'post_id' => $this->post->id,
                 'vote_type' => $type,
@@ -50,10 +60,14 @@ class Vote extends Component
         $this->updateVotesPercent();
     }
 
-    private function updateVotesPercent()
+    /**
+     * @throws \JsonException
+     */
+    private function updateVotesPercent(): void
     {
-        $totalVotes = VoteModel::where('post_id', $this->post->id)->count();
-        $positiveVotes = VoteModel::where('post_id', $this->post->id)->where('vote_type', 'positive')->count();
+        $voteModel = new PostVotes;
+        $totalVotes = $voteModel->where('post_id', $this->post->id)->count();
+        $positiveVotes = $voteModel->where('post_id', $this->post->id)->where('vote_type', 'positive')->count();
 
         if ($totalVotes > 0) {
             $this->votes_percent = ($positiveVotes / $totalVotes) * 100;
@@ -62,9 +76,13 @@ class Vote extends Component
         }
     }
 
-    public function render()
+    /**
+     * @throws \JsonException
+     */
+    public function render(): View|Application|Factory
     {
         $this->updateVotesPercent();
+
         return view('livewire.vote', ['votes_percent' => $this->votes_percent]);
     }
 }

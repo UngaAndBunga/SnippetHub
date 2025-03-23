@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade'); // Foreign key to users table
             $table->foreignId('post_id')->constrained('user_posts')->onDelete('cascade'); // Foreign key to posts table
-            $table->enum('vote_type', ['positive', 'negative']); // VoteModel type column
+            $table->enum('vote_type', ['positive', 'negative']); // PostVotes type column
             $table->timestamps();
             $table->unique(['user_id', 'post_id']); // Ensure a user can only vote once per post
         });

@@ -2,11 +2,28 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Builder;
-class Tags extends Model
+use Illuminate\Support\Carbon;
+
+/**
+ * @property string $tag_name
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
+ * @property int $id
+ *
+ * @method static Builder<static>|Tags newModelQuery()
+ * @method static Builder<static>|Tags newQuery()
+ * @method static Builder<static>|Tags query()
+ * @method static Builder<static>|Tags whereCreatedAt($value)
+ * @method static Builder<static>|Tags whereId($value)
+ * @method static Builder<static>|Tags whereTagName($value)
+ * @method static Builder<static>|Tags whereUpdatedAt($value)
+ *
+ * @mixin \Eloquent
+ */
+class Tags extends MainModel
 {
     use HasFactory;
 
@@ -20,17 +37,16 @@ class Tags extends Model
 
     protected $fillable = [
         'tag_name',
-
     ];
 
     protected function setKeysForSaveQuery($query): Builder
     {
         $keys = $this->getKeyName();
-        if(!is_array($keys)) {
+        if (! is_array($keys)) {
             return parent::setKeysForSaveQuery($query);
         }
 
-        foreach($keys as $keyName) {
+        foreach ($keys as $keyName) {
             $query->where($keyName, '=', $this->getKeyForSaveQuery($keyName));
         }
 

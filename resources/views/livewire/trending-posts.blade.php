@@ -3,6 +3,6 @@
         {{ __('Trending Posts') }}
     </h1>
     @foreach ($postsWithTags as $item)
-        <x-post :post="$item['post']" :tags="$item['tags']" />
+        <x-post-show :post="$item['post']" :tags="$item['tags']" />
     @endforeach
 </div>
