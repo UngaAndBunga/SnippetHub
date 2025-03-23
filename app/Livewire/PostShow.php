@@ -2,7 +2,7 @@
 
 namespace App\Livewire;
 
-use App\Models\tags;
+use App\Models\Tags;
 use App\Models\UserPost;
 use Livewire\Component;
 

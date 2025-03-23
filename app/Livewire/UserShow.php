@@ -20,13 +20,12 @@ class UserShow extends Component
     public function mount($id)
     {
         $this->userId = $id;
-        $this->user = User::find($id);
-        $this->posts = (new UserPost)->where('post_owner', $id)->get();
+        $this->user = \Auth::user();
+        $this->posts = (new UserPost)->where('post_owner', $id);
     }
 
     public function render()
     {
-
         // Determine the appropriate layout based on user authentication status
         $layout = auth()->check() ? 'layouts.app' : 'layouts.post';
 

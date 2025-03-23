@@ -2,7 +2,8 @@
 
 namespace App\Livewire;
 
-use App\Models\tags;
+use App\Models\PostTags;
+use App\Models\Tags;
 use App\Models\User;
 use App\Models\UserPost;
 use Illuminate\Contracts\View\Factory;
@@ -29,7 +30,7 @@ class Search extends Component
 
             foreach ($searchResults as $post) {
                 $postId = $post->id;
-                $tagIds = (new \App\Models\PostTags)->where('post_id', $postId)->pluck('tag_id')->toArray();
+                $tagIds = (new PostTags)->where('post_id', $postId)->pluck('tag_id')->toArray();
                 $tags = Tags::whereIn('id', $tagIds)->pluck('tag_name')->toArray();
                 $postTags[$postId] = $tags; // Store tags associated with the post ID
             }

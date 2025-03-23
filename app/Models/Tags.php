@@ -8,11 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Carbon;
 
 /**
+ * 
+ *
  * @property string $tag_name
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
  * @property int $id
- *
  * @method static Builder<static>|Tags newModelQuery()
  * @method static Builder<static>|Tags newQuery()
  * @method static Builder<static>|Tags query()
@@ -20,7 +21,6 @@ use Illuminate\Support\Carbon;
  * @method static Builder<static>|Tags whereId($value)
  * @method static Builder<static>|Tags whereTagName($value)
  * @method static Builder<static>|Tags whereUpdatedAt($value)
- *
  * @mixin \Eloquent
  */
 class Tags extends MainModel

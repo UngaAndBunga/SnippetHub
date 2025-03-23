@@ -15,6 +15,8 @@ use Laravel\Sanctum\HasApiTokens;
 use Laravel\Sanctum\PersonalAccessToken;
 
 /**
+ * 
+ *
  * @property int $id
  * @property string $name
  * @property string $email
@@ -31,7 +33,6 @@ use Laravel\Sanctum\PersonalAccessToken;
  * @property-read int|null $posts_count
  * @property-read Collection<int, PersonalAccessToken> $tokens
  * @property-read int|null $tokens_count
- *
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User query()
@@ -43,7 +44,6 @@ use Laravel\Sanctum\PersonalAccessToken;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User wherePassword($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User whereRememberToken($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User whereUpdatedAt($value)
- *
  * @mixin \Eloquent
  */
 class User extends Authenticatable
@@ -88,6 +88,6 @@ class User extends Authenticatable
 
     public function followees(): BelongsToMany
     {
-        return $this->belongsToMany(__CLASS__, 'followers', 'follower_id', 'followee_id');
+        return $this->belongsToMany(__CLASS__, 'user_followers', 'follower_id', 'followee_id');
     }
 }

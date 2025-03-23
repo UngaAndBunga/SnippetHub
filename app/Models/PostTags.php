@@ -3,21 +3,20 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
+ * 
+ *
  * @property int $tag_id
  * @property int $post_id
  * @property-read UserPost $post
  * @property-read Tags|null $tag
- *
  * @method static \Illuminate\Database\Eloquent\Builder<static>|PostTags newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|PostTags newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|PostTags query()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|PostTags wherePostId($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|PostTags whereTagId($value)
- *
  * @mixin \Eloquent
  */
 class PostTags extends MainModel
@@ -40,6 +39,6 @@ class PostTags extends MainModel
 
     public function tag(): BelongsTo
     {
-        return $this->belongsTo(tags::class, 'id');
+        return $this->belongsTo(Tags::class, 'id');
     }
 }

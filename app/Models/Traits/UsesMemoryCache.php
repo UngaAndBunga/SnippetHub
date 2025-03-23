@@ -2,6 +2,7 @@
 
 namespace App\Models\Traits;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Cache;
 use Psr\SimpleCache\InvalidArgumentException;
 
@@ -13,7 +14,10 @@ trait UsesMemoryCache
     public static function storeInMemoryCache(string $key, mixed $value, bool $isObject = true): void
     {
         if ($isObject) {
-            Cache::store('serializable_array')->set($key, $value);
+            /**
+             * @var Builder $value
+             */
+            Cache::store('serializable_array')->set($key, $value->get());
             return;
         }
         Cache::store('array')->set($key, $value);

@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
+ * 
+ *
  * @property int $id
  * @property string $post_name
  * @property string $post_content
@@ -18,7 +20,6 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @property-read Collection<int, PostTags> $postTags
  * @property-read int|null $post_tags_count
  * @property-read User $user
- *
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserPost newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserPost newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserPost query()
@@ -29,7 +30,6 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserPost wherePostOwner($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserPost whereTimestamp($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserPost whereUpdatedAt($value)
- *
  * @mixin \Eloquent
  */
 class UserPost extends MainModel
@@ -51,7 +51,7 @@ class UserPost extends MainModel
 
     public function postTags(): HasMany
     {
-        return $this->hasMany(postTags::class, 'post_id');
+        return $this->hasMany(PostTags::class, 'post_id');
 
     }
 
