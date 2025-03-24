@@ -23,7 +23,7 @@ class MainModel extends Model
     use UsesRedisCache;
 
     protected $attributes = [
-      'id'
+        'id'
     ];
     public static int $ttl = 30;
 
@@ -51,12 +51,13 @@ class MainModel extends Model
      * Store data in cache.
      * @throws InvalidArgumentException
      */
-    protected static function storeInCache($key, $data, bool $storeInMemoryCache = false, $compositeTag = ''): void
+    protected static function storeInCache($key, $data, bool $storeInMemoryCache = false, $compositeTag = '', array $columns = []): void
     {
         if ($storeInMemoryCache) {
             self::storeInMemoryCache($key, $data, is_object($data));
         }
-        self::storeInRedisCache($key, $data, self::$ttl, $compositeTag);
+        //todo what do we do with multiple columns???
+        self::storeInRedisCache($key, $data, self::$ttl, $compositeTag, $columns);
     }
 
 
@@ -70,11 +71,11 @@ class MainModel extends Model
         $cacheKey = static::class.':find:'.$id;
 
         $tableName = (new static)->getTable(); // e.g., 'posts'
-        $compositeTag = $tableName . '_id_' . $id;
+        $compositeTag = $tableName.'_id_'.$id;
 
         // If the id has been updated, ignore any cache.
         if (Redis::sismember('updated_ids', $id)) {
-           self::deleteFromRedisCache($cacheKey);
+            self::deleteFromRedisCache($cacheKey);
         } else {
             $cached = self::checkCache($cacheKey);
             if ($cached) {
@@ -86,7 +87,7 @@ class MainModel extends Model
         if ($result) {
             // Track that this id is now cached.
             self::addToCachedIdsInRedis($id);
-            self::storeInCache($cacheKey, $result, $storeInMemoryCache, $compositeTag);
+            self::storeInCache($cacheKey, $result, $storeInMemoryCache, $compositeTag, $column);
         }
 
         return $result;
@@ -129,17 +130,17 @@ class MainModel extends Model
             // If cached is a collection, check each item.
             $stale = false;
             foreach ($cached as $item) {
-                if (isset($item->id) && Redis::command('sismember',['updated_ids', $item->id])) {
+                if (isset($item->id) && Redis::sismember(['updated_ids', $item->id])) {
                     $stale = true;
                     break;
                 }
             }
             if (!$stale) {
                 return $cached;
-            } else {
-                // Invalidate stale cache.
-                self::deleteFromRedisCache($queryKey);
             }
+
+// Invalidate stale cache.
+            self::deleteFromRedisCache($queryKey);
         }
 
         $result = parent::get($columns);
@@ -166,10 +167,10 @@ class MainModel extends Model
         $queryKey = static::class.':where:'.md5(json_encode(func_get_args(), JSON_THROW_ON_ERROR));
 
         // If the column involves an _id, check if that id is in updated_ids.
-        if ($value !== null && str_contains($column, '_id')) {
+        if ($value !== null && str_contains($column, 'id')) {
             if (Redis::sismember('updated_ids', $value)) {
                 // Invalidate cache for this query if stale.
-                self::deleteFromRedisCache($queryKey);
+                self::deleteFromCachedIdsInRedis($value);
             }
         } else {
             // Otherwise, try to retrieve from cache.
@@ -181,20 +182,7 @@ class MainModel extends Model
 
         $result = parent::where($column, $operator, $value, $boolean);
         // If we're filtering by an _id, add it to the cached_ids set.
-        if ($value !== null && str_contains($column, '_id')) {
-            Redis::sadd('cached_ids', $value);
-        }
-        self::storeInCache($queryKey, $result, $storeInMemoryCache);
+        self::storeInCache($queryKey, $result, $storeInMemoryCache, $column);
         return $result;
-    }
-
-    /**
-     * Call this method when a record is updated.
-     * This should be triggered in your model event (e.g., updated, deleted).
-     */
-    public function markAsUpdated()
-    {
-        // Assuming the model's primary key is 'id'.
-        Redis::sadd('updated_ids', $this->id);
     }
 }
